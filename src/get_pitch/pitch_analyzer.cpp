@@ -12,6 +12,19 @@ namespace upc {
 
     for (unsigned int l = 0; l < r.size(); ++l) {
   		/// \TODO Compute the autocorrelation r[l]
+      /** \FET Autocorrelació Calculada
+       * #Titulo Grande
+       * ##Subtitulo
+       * - element 1
+       * - element 2
+       * **/
+
+      r[l] = 0.0f;
+
+      for ( unsigned int n=l; n < x.size(); n++){
+        r[l] += x[n]*x[n-l];
+      }
+      r[l]=r[l] / x.size();
     }
 
     if (r[0] == 0.0F) //to avoid log() and divide zero 
@@ -22,11 +35,18 @@ namespace upc {
     if (frameLen == 0)
       return;
 
+    float omega = 2.0*3.141592/(frameLen -1);
     window.resize(frameLen);
 
     switch (win_type) {
     case HAMMING:
+    
       /// \TODO Implement the Hamming window
+      /// \FET Finestra de Hamming implementada
+      for (unsigned int i = 0; i < frameLen; i++){
+
+        window[i]= 0.54 - 0.46 * std::cos(omega * i);
+      }
       break;
     case RECT:
     default:
@@ -45,12 +65,19 @@ namespace upc {
     if (npitch_max > frameLen/2)
       npitch_max = frameLen/2;
   }
-
   bool PitchAnalyzer::unvoiced(float pot, float r1norm, float rmaxnorm) const {
     /// \TODO Implement a rule to decide whether the sound is voiced or not.
     /// * You can use the standard features (pot, r1norm, rmaxnorm),
     ///   or compute and use other ones.
-    return true;
+    /// \FET Implementa
+  bool unvoiced = true;
+  //float pot_min = - 50.0F;
+  //float R10_min = 0.4F;
+  //float Rl0_min = 0.5F; 
+  if (((int)pot >= (int)pot_min)&&(rmaxnorm > vmaxnorm)&&(r1norm > R10_min)){
+    unvoiced = false;
+  }
+    return unvoiced;
   }
 
   float PitchAnalyzer::compute_pitch(vector<float> & x) const {
@@ -75,10 +102,23 @@ namespace upc {
 	///    - The lag corresponding to the maximum value of the pitch.
     ///	   .
 	/// In either case, the lag should not exceed that of the minimum value of the pitch.
-
+  /// \FET pitch trobat
+    
+    for ( iR= iRMax = r.begin() + npitch_min; iR < r.begin() + npitch_max; iR++){
+        if ( *iR > *iRMax){
+          iRMax=iR;
+        }
+    }
     unsigned int lag = iRMax - r.begin();
 
     float pot = 10 * log10(r[0]);
+
+    for ( iR= iRMax = r.begin() + npitch_min; iR < r.begin() + npitch_max; iR++){
+        if ( *iR > *iRMax){
+          iRMax=iR;
+        }
+    }
+    
 
     //You can print these (and other) features, look at them using wavesurfer
     //Based on that, implement a rule for unvoiced
