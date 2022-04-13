@@ -65,12 +65,12 @@ namespace upc {
     if (npitch_max > frameLen/2)
       npitch_max = frameLen/2;
   }
-  bool PitchAnalyzer::unvoiced(float pot, float r1norm, float rmaxnorm) const {
+  bool PitchAnalyzer::unvoiced(float pot, float r1norm, float rmaxnorm ) const {
     /// \TODO Implement a rule to decide whether the sound is voiced or not.
     /// * You can use the standard features (pot, r1norm, rmaxnorm),
     ///   or compute and use other ones.
-    /// \FET Implementa
-  bool unvoiced = true;
+    /// \FET Decició Voiced vs Unvoiced
+  /*bool unvoiced = true;
   //float pot_min = - 50.0F;
   //float R10_min = 0.4F;
   //float Rl0_min = 0.5F; 
@@ -78,6 +78,17 @@ namespace upc {
     unvoiced = false;
   }
     return unvoiced;
+  }*/
+  float th_1 = 0.95;
+    float th_2 = 0.63;
+    //float th_zcr = 1100;
+    float th_pot = -48;
+    if((r1norm >= 0.4F &&  pot >= (int)pot_min) && (rmaxnorm >= vmaxnorm )){
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 
   float PitchAnalyzer::compute_pitch(vector<float> & x) const {
@@ -123,7 +134,7 @@ namespace upc {
     //You can print these (and other) features, look at them using wavesurfer
     //Based on that, implement a rule for unvoiced
     //change to #if 1 and compile
-#if 0
+#if 1
     if (r[0] > 0.0F)
       cout << pot << '\t' << r[1]/r[0] << '\t' << r[lag]/r[0] << endl;
 #endif
