@@ -54,6 +54,7 @@ namespace upc {
     }
   }
 
+
   void PitchAnalyzer::set_f0_range(float min_F0, float max_F0) {
     npitch_min = (unsigned int) samplingFreq/max_F0;
     if (npitch_min < 2)
