@@ -30,7 +30,14 @@ namespace upc {
       samplingFreq, ///< sampling rate (in samples per second). Has to be set in the constructor call
       npitch_min, ///< minimum value of pitch period, in samples
       npitch_max; ///< maximum value of pitch period, in samples
+<<<<<<< HEAD
       float umaxnorm; ///Umbral del maximo de la autocorrelacion normalizada
+=======
+    float vmaxnorm; ////< Umbral del maximo de la autocorrelación normalizada
+    float pot_min;
+    float R10_min;
+ 
+>>>>>>> 5eba51df9528b8af5f9a836ce901fbb2b79e3b57
 	///
 	/// Computes correlation from lag=0 to r.size()
 	///
@@ -49,18 +56,35 @@ namespace upc {
 
   public:
     PitchAnalyzer(	unsigned int fLen,			///< Frame length in samples
-					unsigned int sFreq,			///< Sampling rate in Hertzs
+					unsigned int sFreq,		///< Sampling rate in Hertzs
+          float vmaxnorm_, 
+          float pot_min_,
+          float R10_min_,	
 					Window w=PitchAnalyzer::HAMMING,	///< Window type
 					float min_F0 = MIN_F0,		///< Pitch range should be restricted to be above this value
 					float max_F0 = MAX_F0		///< Pitch range should be restricted to be below this value
+<<<<<<< HEAD
           float umaxnorm_ = 
          )
+=======
+          
+         
+         )
+
+
+>>>>>>> 5eba51df9528b8af5f9a836ce901fbb2b79e3b57
 	{
       frameLen = fLen;
       samplingFreq = sFreq;
       set_f0_range(min_F0, max_F0);
       set_window(w);
+<<<<<<< HEAD
       umaxnorm=umaxnorm_;
+=======
+      vmaxnorm = vmaxnorm_;
+      pot_min=pot_min_;
+      R10_min=R10_min_;
+>>>>>>> 5eba51df9528b8af5f9a836ce901fbb2b79e3b57
     }
 
 	///
