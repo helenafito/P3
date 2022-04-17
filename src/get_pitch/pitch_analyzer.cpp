@@ -45,7 +45,7 @@ namespace upc {
       /// \FET Finestra de Hamming implementada
       for (unsigned int i = 0; i < frameLen; i++){
 
-        window[i]= 0.54 - 0.46 * std::cos(omega * i);
+        window[i]= 0.54 - 0.28 * cosl(omega * i); 
       }
       break;
     case RECT:

@@ -25,13 +25,10 @@ const float gross_threshold = 0.2F; //gross error:  +/-20 %
 
 static const char USAGE[] = R"(
 pitch_evaluate - Evaluate error rate of pitch evaluation
-
 Usage:
     pitch_evaluate <file-f0ref> ...
-
 Arguments:
     file-f0ref  File with the reference values of F0 (ext. .f0ref)
-
 Note:
     For each reference file, a test file is required in the same directory
     with the same base name and with extension .f0
