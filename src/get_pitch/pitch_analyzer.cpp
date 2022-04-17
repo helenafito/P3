@@ -12,21 +12,6 @@ namespace upc {
 
     for (unsigned int l = 0; l < r.size(); ++l) {
   		/// \TODO Compute the autocorrelation r[l]
-<<<<<<< HEAD
-      /// \FET Autocorrelació calculada
-      /** \FET Autocorrelació calculada
-       * #Titulo grande
-       *  ##Subtitulo
-       * -elem 1
-       * -elem2
-       */
-      r[l]=0.0f;
-      for(unsigned int n = l; n < x.size(); n++){
-        r[l] +=  x[n]*x[n-l];
-
-      }
-      r[l] = r[l] / x.size();
-=======
       /** \FET Autocorrelació Calculada
        * #Titulo Grande
        * ##Subtitulo
@@ -40,7 +25,6 @@ namespace upc {
         r[l] += x[n]*x[n-l];
       }
       r[l]=r[l] / x.size();
->>>>>>> 5eba51df9528b8af5f9a836ce901fbb2b79e3b57
     }
 
     if (r[0] == 0.0F) //to avoid log() and divide zero 
@@ -58,25 +42,12 @@ namespace upc {
     case HAMMING:
     
       /// \TODO Implement the Hamming window
-<<<<<<< HEAD
-     float a0=0.53836F;   
-     float a1=0.46164F;  
-     for(unsigned int i=0; i<frameLen; ++i){ 
-        window[i]=a0-a1*cos((2*M_PI*i)/(frameLen-1)); 
-         }
-         
-      }
-
-    
-    break;
-=======
       /// \FET Finestra de Hamming implementada
       for (unsigned int i = 0; i < frameLen; i++){
 
-        window[i]= 0.54 - 0.46 * std::cos(omega * i);
+        window[i]= 0.54 - 0.28 * cosl(omega * i); 
       }
       break;
->>>>>>> 5eba51df9528b8af5f9a836ce901fbb2b79e3b57
     case RECT:
     default:
       window.assign(frameLen, 1);
@@ -99,13 +70,6 @@ namespace upc {
     /// \TODO Implement a rule to decide whether the sound is voiced or not.
     /// * You can use the standard features (pot, r1norm, rmaxnorm),
     ///   or compute and use other ones.
-<<<<<<< HEAD
-    bool unvoiced = true;
-    if(rmaxnorm > umaxnorm)
-    unvoiced = false;
-
-    return unvoiced;
-=======
     /// \FET Decició Voiced vs Unvoiced
   /*bool unvoiced = true;
   //float pot_min = - 50.0F;
@@ -116,17 +80,16 @@ namespace upc {
   }
     return unvoiced;
   }*/
-  float th_1 = 0.95;
-    float th_2 = 0.63;
+  //float th_1 = 0.95;
+   // float th_2 = 0.63;
     //float th_zcr = 1100;
-    float th_pot = -48;
-    if((r1norm >= 0.4F &&  pot >= (int)pot_min) && (rmaxnorm >= vmaxnorm )){
+   // float th_pot = -48;
+    if((r1norm >= 0.59F &&  pot >= (int)pot_min) && (rmaxnorm >= vmaxnorm )){
       return false;
     }
     else {
       return true;
     }
->>>>>>> 5eba51df9528b8af5f9a836ce901fbb2b79e3b57
   }
 
   float PitchAnalyzer::compute_pitch(vector<float> & x) const {
@@ -150,17 +113,6 @@ namespace upc {
 	///    - The first negative value of the autocorrelation.
 	///    - The lag corresponding to the maximum value of the pitch.
     ///	   .
-<<<<<<< HEAD
-	/// In either case, the lag should not exceed that of the minimum value of the pitch
-  /// \FET- Max localitzat
-  
-  for(iR = iRMax = r.begin() + npitch_min; iR < r.begin() + npitch_max; iR++){
-      if(*iR > *iRMax){
-        iRMax = iR;
-      }
-    }
-
-=======
 	/// In either case, the lag should not exceed that of the minimum value of the pitch.
   /// \FET pitch trobat
     
@@ -169,14 +121,10 @@ namespace upc {
           iRMax=iR;
         }
     }
->>>>>>> 5eba51df9528b8af5f9a836ce901fbb2b79e3b57
     unsigned int lag = iRMax - r.begin();
 
     float pot = 10 * log10(r[0]);
 
-<<<<<<< HEAD
-   
-=======
     for ( iR= iRMax = r.begin() + npitch_min; iR < r.begin() + npitch_max; iR++){
         if ( *iR > *iRMax){
           iRMax=iR;
@@ -184,7 +132,6 @@ namespace upc {
     }
     
 
->>>>>>> 5eba51df9528b8af5f9a836ce901fbb2b79e3b57
     //You can print these (and other) features, look at them using wavesurfer
     //Based on that, implement a rule for unvoiced
     //change to #if 1 and compile

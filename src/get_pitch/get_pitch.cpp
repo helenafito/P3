@@ -18,17 +18,16 @@ using namespace upc;
 
 static const char USAGE[] = R"(
 get_pitch - Pitch Estimator 
-
 Usage:
     get_pitch [options] <input-wav> <output-txt>
     get_pitch (-h | --help)
     get_pitch --version
-
 Options:
-    -m FLOAT, --umaxnorm FLOAT  Umbral de el maximo de la autocorrelacion normalizada [default: 0.5]
+    -m FLOAT, --vmaxnorm FLOAT  Umbral de el maximo de la autocorrelación normalizada [default: 0.5]
+    -p FLOAT, --pot_min FLOAT  Umbral de potencia [default: -50]
+    -1 FLOAT, --R10_min FLOAT  Umbral de autocorrelació a 0 [default: 0.4]
     -h, --help  Show this screen
     --version   Show the version of the project
-
 Arguments:
     input-wav   Wave file with the audio signal
     output-txt  Output file: ASCII file with the result of the estimation:
@@ -47,7 +46,12 @@ int main(int argc, const char *argv[]) {
 
 	std::string input_wav = args["<input-wav>"].asString();
 	std::string output_txt = args["<output-txt>"].asString();
-  float umaxnorm = std::stof(args["--umaxnorm"].asString();
+
+  float vmaxnorm = std::stof(args["--vmaxnorm"].asString());
+  float pot_min = std::stof(args["--pot_min"].asString());
+  float R10_min = std::stof(args["--R10_min"].asString());
+
+
 
   // Read input sound file
   unsigned int rate;
@@ -61,7 +65,7 @@ int main(int argc, const char *argv[]) {
   int n_shift = rate * FRAME_SHIFT;
 
   // Define analyzer
-  PitchAnalyzer analyzer(n_len, rate, PitchAnalyzer::RECT, 50, 500, umaxnorm);
+  PitchAnalyzer analyzer(n_len, rate, vmaxnorm, pot_min, R10_min, PitchAnalyzer::HAMMING, 50, 500) ;
 
   /// \TODO
   /// Preprocess the input signal in order to ease pitch estimation. For instance,
