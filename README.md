@@ -42,6 +42,7 @@ Ejercicios básicos
 	 autocorrelación de la señal y la posición del primer máximo secundario.
 
     <img src="img/subplot.png" width="800" align="center">
+    
 	 NOTA: es más que probable que tenga que usar Python, Octave/MATLAB u otro programa semejante para
 	 hacerlo. 
 
