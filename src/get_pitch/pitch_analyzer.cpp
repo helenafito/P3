@@ -80,16 +80,10 @@ namespace upc {
   }
     return unvoiced;
   }*/
-  float th_1 = 0.95;
-    float th_2 = 0.63;
-    //float th_zcr = 1100;
-    float th_pot = -48;
-    if((r1norm >= 0.4F &&  pot >= (int)pot_min) && (rmaxnorm >= vmaxnorm )){
-      return false;
-    }
-    else {
-      return true;
-    }
+    if(r1norm < 0.9  || rmaxnorm < 0.2 || pot < -40){
+      return true;}
+    else return false;
+    
   }
 
   float PitchAnalyzer::compute_pitch(vector<float> & x) const {
@@ -124,22 +118,18 @@ namespace upc {
     unsigned int lag = iRMax - r.begin();
 
     float pot = 10 * log10(r[0]);
-
-    for ( iR= iRMax = r.begin() + npitch_min; iR < r.begin() + npitch_max; iR++){
-        if ( *iR > *iRMax){
-          iRMax=iR;
-        }
-    }
     
 
     //You can print these (and other) features, look at them using wavesurfer
     //Based on that, implement a rule for unvoiced
     //change to #if 1 and compile
+ FILE * correlationfile = fopen("autoR.p0","a");
 #if 1
     if (r[0] > 0.0F)
       cout << pot << '\t' << r[1]/r[0] << '\t' << r[lag]/r[0] << endl;
+      fprintf(correlationfile,"%f\t%f\t%f\n",pot,r[1]/r[0],r[lag]/r[0]);
 #endif
-    
+     fclose(correlationfile);
     if (unvoiced(pot, r[1]/r[0], r[lag]/r[0]))
       return 0;
     else
