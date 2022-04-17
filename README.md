@@ -41,8 +41,13 @@ Ejercicios básicos
      unos 30 ms de un fonema sonoro y su periodo de pitch; y, en otro *subplot*, se vea con claridad la
 	 autocorrelación de la señal y la posición del primer máximo secundario.
 
+<<<<<<< HEAD
    	
    <img src="PAV/P3/subplot.png" width="640" align="center">
+=======
+    <img src="PAV/P3/img/subplot.png" width="800" align="center">
+    
+>>>>>>> 9327e8e39135d8e41badfee87e96ecf5d41e4d02
 	 NOTA: es más que probable que tenga que usar Python, Octave/MATLAB u otro programa semejante para
 	 hacerlo. 
 
