@@ -70,25 +70,7 @@ int main(int argc, const char *argv[]) {
   /// \TODO
   /// Preprocess the input signal in order to ease pitch estimation. For instance,
   /// central-clipping or low pass filtering may be used.
-  float max_senyal = 0.0;
-  for( unsigned int i=0; i<x.size();i++){
-    if(x[i] > max_senyal){
-      max_senyal=x[i];
-    }
-  }
-  float th_cp=0.02*max_senyal;
-  for(unsigned int i=0; i < x.size();i++){
-    x[i] = x[i] / max_senyal;
-    if(abs(x[i]) < th_cp){
-      x[i]=0;
-    }
-    if( x[i] > th_cp){
-      x[i] -=th_cp;
-    }
-    if( x[i] < -th_cp){
-      x[i]+=th_cp;
-    }
-  }
+  
   // Iterate for each frame and save values in f0 vector
   vector<float>::iterator iX;
   vector<float> f0;
@@ -100,15 +82,7 @@ int main(int argc, const char *argv[]) {
   /// \TODO
   /// Postprocess the estimation in order to supress errors. For instance, a median filter
   /// or time-warping may be used.
-std::vector<float> aux(f0);
-  unsigned int j = 0;
-  float maxim,minim;
 
-  for(j = 2; j < aux.size() - 1; ++j) {
-    minim = min(min(aux[j-1], aux[j]), aux[j+1]);
-    maxim = max(max(aux[j-1], aux[j]), aux[j+1]);
-    f0[j] = aux[j-1] + aux[j] + aux[j+1] - minim - maxim;
-  }
   // Write f0 contour into the output file
   ofstream os(output_txt);
   if (!os.good()) {
