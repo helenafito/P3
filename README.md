@@ -81,6 +81,11 @@ Ejercicios básicos
     y el *score* TOTAL proporcionados por `pitch_evaluate` en la evaluación de la base de datos 
 	`pitch_db/train`..
 
+   <img src="finalfoto.png" width="640" align="center">
+
+
+
+
 Ejercicios de ampliación
 ------------------------
 
