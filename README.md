@@ -52,6 +52,12 @@ Ejercicios básicos
    * Determine el mejor candidato para el periodo de pitch localizando el primer máximo secundario de la
      autocorrelación. Inserte a continuación el código correspondiente.
 
+     
+
+
+
+
+
    * Implemente la regla de decisión sonoro o sordo e inserte el código correspondiente.
 
    bool PitchAnalyzer::unvoiced(float pot, float r1norm, float rmaxnorm ) const {
@@ -63,8 +69,7 @@ Ejercicios básicos
     }
   }
 
-- Una vez completados los puntos anteriores, dispondrá de una primera versión del estimador de pitch. El 
-  resto del trabajo consiste, básicamente, en obtener las mejores prestaciones posibles con él.
+- Una vez completados los puntos anteriores, dispondrá de una primera versión del estimador de pitch. El resto del trabajo consiste, básicamente, en obtener las mejores prestaciones posibles con él.
 
   * Utilice el programa `wavesurfer` para analizar las condiciones apropiadas para determinar si un
     segmento es sonoro o sordo. 
@@ -74,15 +79,20 @@ Ejercicios básicos
 		(r[0]), la autocorrelación normalizada de uno (r1norm = r[1] / r[0]) y el valor de la
 		autocorrelación en su máximo secundario (rmaxnorm = r[lag] / r[0]).
 
+
+    <img src="image.png" width="640" align="center">
+
+
 		Puede considerar, también, la conveniencia de usar la tasa de cruces por cero.
 
 	    Recuerde configurar los paneles de datos para que el desplazamiento de ventana sea el adecuado, que
 		en esta práctica es de 15 ms.
 
-      - Use el estimador de pitch implementado en el programa `wavesurfer` en una señal de prueba y compare
-	    su resultado con el obtenido por la mejor versión de su propio sistema.  Inserte una gráfica
-		ilustrativa del resultado de ambos estimadores.
+      - Use el estimador de pitch implementado en el programa `wavesurfer` en una señal de prueba y compare su resultado con el obtenido por la mejor versión de su propio sistema.  Inserte una gráfica ilustrativa del resultado de ambos estimadores.
      
+      <img src="image1.png" width="640" align="center">
+
+
 		Aunque puede usar el propio Wavesurfer para obtener la representación, se valorará
 	 	el uso de alternativas de mayor calidad (particularmente Python).
   
@@ -105,13 +115,19 @@ Ejercicios de ampliación
   una parte importante de la evaluación recaerá en el resultado obtenido en la estimación de pitch en la
   base de datos.
 
-  * Inserte un *pantallazo* en el que se vea el mensaje de ayuda del programa y un ejemplo de utilización
-    con los argumentos añadidos.
+  * Inserte un *pantallazo* en el que se vea el mensaje de ayuda del programa y un ejemplo de utilización con los argumentos añadidos.
 
+<img src="ampli1.png" width="640" align="center">
+<img src="ampli2.png" width="640" align="center">
 - Implemente las técnicas que considere oportunas para optimizar las prestaciones del sistema de estimación
   de pitch.
 
   Entre las posibles mejoras, puede escoger una o más de las siguientes:
+
+<img src="pprocess.png" width="640" align="center">
+<img src="cclipping.png" width="640" align="center">
+
+
 
   * Técnicas de preprocesado: filtrado paso bajo, diezmado, *center clipping*, etc.
   * Técnicas de postprocesado: filtro de mediana, *dynamic time warping*, etc.
